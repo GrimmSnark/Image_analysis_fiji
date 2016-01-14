@@ -1,0 +1,43 @@
+//These lines must be added to startupmacros file
+
+
+// Image preprocessing
+
+  macro "Image preprocessing... " 
+	{
+	  runMacro("preprocessing.ijm");
+	  
+	}
+
+	
+	// Image preprocessing Batch
+
+  macro "Image preprocessing Batch... " 
+	{
+	  runMacro("preprocessing_batch.ijm");
+	  
+	}
+
+	// Background Luminance Subtraction
+
+  macro "Background Luminance Subtraction... " 
+	{
+	  runMacro("background_subtraction.txt");
+	  
+	}
+
+	// Anterograde Tracer Quantification 
+
+  macro "Anterograde Tracer Quantification... " 
+	{
+	  runMacro("quantification_anterograde.ijm");
+	  
+	}
+
+	// Retrograde Tracer Quantification
+
+  macro "Retrograde Tracer Quantification... " 
+	{
+	  runMacro("quantification_retrograde.ijm");
+	  
+	}
