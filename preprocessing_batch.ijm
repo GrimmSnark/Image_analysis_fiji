@@ -53,7 +53,7 @@ function batchPreproccessing(input, output, filename)
 		}
 		else
 		{
-		print(filename +"has NOT been processed as has already been grayscaled");
+		print(filename +" has NOT been processed as has already been grayscaled");
 		close();
 		}
 	}

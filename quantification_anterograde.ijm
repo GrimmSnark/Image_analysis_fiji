@@ -2,16 +2,17 @@
 // Macro for tracer quantification of anterograde pictures 
 // Thresholded image must have undergone threholding step
 // ROI image must be counterstained image which will contain ROI demarcations of areas
+// Images must undergo the Set Scale step for this script to be accurate
 
-waitForUser("Select Thresholded window");
+showMessageWithCancel("Select Thresholded window and then press ok");
 thresholdTitle = getTitle();
-run("Set Scale...", "distance=617 known=200 pixel=1 unit=um"); // sets scale for image if you already have not, will need to be personalised
-waitForUser("Select ROI window"); // selects counterstained image with ROIs for each area of anaylsis/comparison
+//run("Set Scale...", "distance=617 known=200 pixel=1 unit=um"); // sets scale for image if you already have not, will need to be personalised
+showMessageWithCancel("Select ROI window and then press ok"); // selects counterstained image with ROIs for each area of anaylsis/comparison
 ROITitle = getTitle();
-run("Set Scale...", "distance=617 known=200 pixel=1 unit=um"); // sets scale for image if you already have not, will need to be personalised
+//run("Set Scale...", "distance=617 known=200 pixel=1 unit=um"); // sets scale for image if you already have not, will need to be personalised
 
 setTool("polygon");
-waitForUser("Set ROIs for analysis then press ctrl + t to add to manager, or cancel to exit macro");
+showMessageWithCancel("Set ROIs for analysis then press ctrl + t to add to manager, or cancel to exit macro");
 numROI = roiManager("count");
 
 // creates areas for values needed later to the size of number of ROIs
