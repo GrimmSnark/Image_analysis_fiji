@@ -10,7 +10,7 @@ while(!happy)
 	currentTitle = getTitle();
 	run("Duplicate...", currentTitle); // duplicates images for reference
 	selectImage(currentTitle);
-	waitForUser("select the background ROI and press YES, or cancel to exit macro");
+	waitForUser("Select the background ROI for luminance measurement and press OK");
 	run("Set Measurements...", " mean standard redirect=None decimal=0");
 	run("Measure"); 
 	selectImage(currentTitle);
@@ -30,7 +30,7 @@ while(!happy)
 	selectImage(thresholdImageID);
 	//run("Invert LUT"); // may need to re-invert LUT depending on image type
 
-	response = getBoolean("If happy with thresholding, press YES to save");
+	response = getBoolean("If happy with thresholding, press YES to save \n To repeat luminance measurement press NO");
 
 	if (response == 1) // if happy with image thresholding, saves and closes everything
 	{

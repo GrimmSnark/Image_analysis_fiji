@@ -11,7 +11,7 @@ ROITitle = getTitle();
 run("Set Scale...", "distance=617 known=200 pixel=1 unit=um"); // sets scale for image if you already have not, will need to be personalised
 
 setTool("polygon");
-waitForUser("Set ROIs for analysis then press ctrl + t to add to manager, or cancel to exit macro");
+waitForUser("Set ROIs for analysis then press ctrl + t to add to manager, thetn press OK");
 numROI = roiManager("count");
 
 // creates areas for values needed later to the size of number of ROIs
@@ -98,9 +98,8 @@ else
 	
 	for (jk = 0; jk <numROI; jk++)
 	{
-		//jj = jk + 1; // as ROI displayed numbers are 1 indexed not zero, this corrects for that
-		write("TracerCoverage("+jk+")=" +TracerPecentageCover[jk]);
-		write("Cells counted in ROI("+jk+")=" +blackCoverage[jk]);
+		jj = jk + 1; // as ROI displayed numbers are 1 indexed not zero, this corrects for that
+		write("Cells counted in ROI("+jj+")=" +blackCoverage[jk]);
 	
 	}
 	
@@ -108,6 +107,15 @@ selectWindow(thresholdTitle);
 run("Invert LUT");
 
 //creates stack image of the thresholded image, with what is detected in the analysis 
+selectWindow(ROITitle);
+if (getSliceNumber() == 1)
+{
+	run("Flatten"); 
+}
+else
+{
+	
+}
 run("Images to Stack", "name=Stack title=[] use");
 roiManager("Show All with labels");
 
