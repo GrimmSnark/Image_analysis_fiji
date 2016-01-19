@@ -5,8 +5,8 @@
 macro "Preprocessing FITC... " {
 
 // These options need personalised for individual data sets
-fileIdentifier = "(FITC).TIF";
-fileIdentifier_2 = "(FITC).tif"); // ImageJ treats capitalised and non-capitalised letters differently
+fileIdentifier = ").TIF";
+fileIdentifier_2 = ").tif"; // ImageJ treats capitalised and non-capitalised letters differently
  
 dir = getDirectory("Choose a Directory for Preprocessing");
 //dir_2 = getDirectory("Choose a Directory for Saving Files");
@@ -31,13 +31,15 @@ function batchPreproccessing(input, output, filename)
 		if (bitDepth() != 8) // does not process grayscaled images
 		{
 			run("Set Scale...", "distance=617 known=200 pixel=1 unit=um"); // You may or may not want to properly set the scales for the images (distance in pixels, known distance in real life, pixel aspect ratio (1), unit of length (see macro website for ImageJ)
-			run("Gaussian Blur...", "sigma=3.5"); // may need to change sigma size to get the right level of filtering of artefacts 
+			run("Gaussian Blur...", "sigma=1.5"); // may need to change sigma size to get the right level of filtering of artefacts 
 			run("Split Channels"); // Splits channels into red, green, blue and grayscales them 
 
-			selectImage(filename+" (red)");
+			selectImage("C1-"+filename);
 			close(); // deletes red channel
-			selectImage(filename+" (blue)");
+			selectImage("C3-"+filename);
 			close(); // deletes blue channel, may need to personalise for dataset
+			run("8-bit");
+			run("8-bit");
 			
 			if (endsWith(filename, "TIF")==1 || endsWith(filename, "tif") == 1 ) // if filename ends in 'TIF' or 'tif' savers files as .tif. otherwise saves as .jpeg
 				{
@@ -47,7 +49,7 @@ function batchPreproccessing(input, output, filename)
 				{
 				saveAs("jpeg", output +filename +"_gray");
 				}
-			print(filename +"has been processed and saved"); // outputs current image name and that is has been processed succesfully
+			print(filename +" has been processed and saved"); // outputs current image name and that is has been processed succesfully
 				
 			call("java.lang.System.gc"); // cleans up memory used, this script may fail if ImageJ uses all the RAM in computer. ImageJ is not very efficient at releasing unused RAM 
 		}

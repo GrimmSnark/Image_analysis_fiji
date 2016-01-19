@@ -26,93 +26,101 @@ run("Invert LUT"); // may need to invert LUT depending on image type ( the analy
 run("8-bit");
 
 if (numROI == 1)
-	{
-		j = 0;
-		selectWindow(thresholdTitle);
-		roiManager("select", j)
-		run("Restore Selection");
-		run("Set Measurements...", "area mean standard redirect=None decimal=0");
-		run("Measure");
-		Area[j] = getResult("Area",0);
-		SD[j] =getResult("StdDev",0);
-		run("8-bit");
-		run("Analyze Particles...", "size=[20-Infinity]  circularity=[0.00-1.00] show=[Overlay Outlines] display include summarize add"); // runs the actual anaylsis of the tracer (size= [xxx-Infinity] xxx = minimum pixel area to be counted
+{
+	j = 0;
+	selectWindow(thresholdTitle);
+	roiManager("select", j)
+	run("Restore Selection");
+	run("Set Measurements...", "area mean standard redirect=None decimal=0");
+	run("Measure");
+	Area[j] = getResult("Area",0);
+	SD[j] =getResult("StdDev",0);
+	run("8-bit");
+	run("Analyze Particles...", "size=[20-Infinity]  circularity=[0.00-1.00] show=[Overlay Outlines] display include summarize add"); // runs the actual anaylsis of the tracer (size= [xxx-Infinity] xxx = minimum pixel area to be counted
 
+	//retrieves information from the summary window
+	selectWindow("Summary"); 
+	lines = split(getInfo(), "\n"); 
+	headings = split(lines[0], "\t"); 
+	values = split(lines[lengthOf(lines)-1], "\t");
+	// prints out all of the values into an array form
+	/*
+	for (i=0; i<headings.length; i++) 
+	{
+	print(headings[i]+": "+values[i]);
+	}
+	*/
+	//write(values[2]); // prints the tracer coverage value 
+	blackCoverage[j]= values[2]; //values[2] is the percentage coverage of black pixels in array blackCoverage
+	TracerPecentageCover[j]= ((blackCoverage[j])/Area[j])*100; // works out tracer coverage as a percentage of the ROI area
+}
+else
+{
+	
+for (i = 0; i <numROI; i++)
+
+	{
+		
+		roiManager("select", i);
+		selectWindow(thresholdTitle);
+		roiManager("select", i);
+		run("Set Measurements...", "area mean standard redirect=None decimal=0");
+		selectWindow(thresholdTitle);
+		roiManager("select", i);
+		run("Measure");
+		
+		Area[i] = getResult("Area",0);
+		SD[i] =getResult("StdDev",0);
+		
+		
+		//write(Area[i]);
+		//waitForUser("Summary");
+		
+		roiManager("select", i);
+		run("8-bit");
+		run("8-bit");
+		
+		run("Analyze Particles...", "size=[20-Infinity]  circularity=[0.00-1.00] show=[Overlay Masks] display include summarize add"); // runs the actual anaylsis of the tracer (size= [xxx-Infinity] xxx = minimum pixel area to be counted
+		
 		//retrieves information from the summary window
-		selectWindow("Summary"); 
+		selectWindow("Summary");
 		lines = split(getInfo(), "\n"); 
 		headings = split(lines[0], "\t"); 
 		values = split(lines[lengthOf(lines)-1], "\t");
-		// prints out all of the values into an array form
-		/*
-		for (i=0; i<headings.length; i++) 
-		{
-		print(headings[i]+": "+values[i]);
-		}
-		*/
-		//write(values[2]); // prints the tracer coverage value 
-		blackCoverage[j]= values[2]; //values[2] is the percentage coverage of black pixels in array blackCoverage
-		TracerPecentageCover[j]= ((blackCoverage[j])/Area[j])*100; // works out tracer coverage as a percentage of the ROI area
-	}
-else
-	{
+		selectWindow("Summary"); 
 		
-	for (i = 0; i <numROI; i++)
-	
-		{
-			
-			roiManager("select", i);
-			selectWindow(thresholdTitle);
-			roiManager("select", i);
-			run("Set Measurements...", "area mean standard redirect=None decimal=0");
-			selectWindow(thresholdTitle);
-			roiManager("select", i);
-			run("Measure");
-			
-			Area[i] = getResult("Area",0);
-			SD[i] =getResult("StdDev",0);
-			
-			
-			//write(Area[i]);
-			//waitForUser("Summary");
-			
-			roiManager("select", i);
-			run("8-bit");
-			run("8-bit");
-			
-			run("Analyze Particles...", "size=[20-Infinity]  circularity=[0.00-1.00] show=[Overlay Masks] display include summarize add"); // runs the actual anaylsis of the tracer (size= [xxx-Infinity] xxx = minimum pixel area to be counted
-			
-			//retrieves information from the summary window
-			selectWindow("Summary");
-			lines = split(getInfo(), "\n"); 
-			headings = split(lines[0], "\t"); 
-			values = split(lines[lengthOf(lines)-1], "\t");
-			selectWindow("Summary"); 
-			
-			blackCoverage[i]= values[2];
-			TracerPecentageCover[i]= ((blackCoverage[i])/Area[i])*100;
-			Array.show(TracerPecentageCover);
-			selectWindow(thresholdTitle);
-			roiManager("deselect");
-			run("Clear Results");
-		}
+		blackCoverage[i]= values[2];
+		TracerPecentageCover[i]= ((blackCoverage[i])/Area[i])*100;
+		Array.show(TracerPecentageCover);
+		selectWindow(thresholdTitle);
+		roiManager("deselect");
+		run("Clear Results");
 	}
+}
 	
-	Array.show(TracerPecentageCover);
 	Array.show(blackCoverage);
 	
-	for (jk = 0; jk <numROI; jk++)
-	{
-		//jj = jk + 1; // as ROI displayed numbers are 1 indexed not zero, this corrects for that
-		write("TracerCoverage("+jk+")=" +TracerPecentageCover[jk]);
-		write("Area Covered("+jk+")=" +blackCoverage[jk] +" um^2");
-	
-	}
+for (jk = 0; jk <numROI; jk++)
+{
+	//jj = jk + 1; // as ROI displayed numbers are 1 indexed not zero, this corrects for that
+	write("TracerCoverage("+jk+")=" +TracerPecentageCover[jk]);
+	write("Area Covered("+jk+")=" +blackCoverage[jk] +" um^2");
+
+}
 	
 selectWindow(thresholdTitle);
 run("Invert LUT");
 
 //creates stack image of the thresholded image, with what is detected in the analysis 
+selectWindow(ROITitle);
+if (getSliceNumber() == 1)
+{
+	run("Flatten"); 
+}
+else
+{
+	
+}
 run("Images to Stack", "name=Stack title=[] use");
 roiManager("Show All with labels");
 
@@ -133,11 +141,11 @@ while (nImages>0)
  // closes all non-image windows
  list = getList("window.titles");
  
-     for (i=0; i<list.length; i++)
-	{ 
-     winame = list[i]; 
-     	selectWindow(winame); 
-     run("Close"); 
-    } 
- 
- 
+ for (i=0; i<list.length; i++)
+{ 
+ winame = list[i]; 
+	selectWindow(winame); 
+ run("Close"); 
+} 
+
+

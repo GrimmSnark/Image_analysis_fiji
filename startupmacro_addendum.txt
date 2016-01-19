@@ -22,7 +22,7 @@
 
   macro "Background Luminance Subtraction... " 
 	{
-	  runMacro("background_subtraction.txt");
+	  runMacro("background_subtraction.ijm");
 	  
 	}
 
