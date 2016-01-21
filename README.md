@@ -1,5 +1,5 @@
 # Image_analysis_fiji
-Anaylsis scripts utilised for mouse connectivty paper
+Analysis scripts utilised for mouse connectivty paper
 
 This package of ImageJ/Fiji macros is designed to allow the user to quatify fluorescent tracing photomicrographs and compare
 the connectivty between multiple regions in the brain
