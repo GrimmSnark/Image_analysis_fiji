@@ -5,7 +5,7 @@ This package of ImageJ/Fiji macros is designed to allow the user to quatify fluo
 the connectivity between multiple regions in the brain
 
 Lines in the startupmacroaddendum should be added to the local startup macro file in your ImageJ/Fiji macro folder
-.ijm files numbered 1-4 should be copied into that folder as well
+.ijm files numbered 1-5 should be copied into that folder as well
 
 Workflow should proceed with:
 
