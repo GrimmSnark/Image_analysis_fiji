@@ -5,7 +5,7 @@
 
   macro "Image preprocessing... " 
 	{
-	  runMacro("preprocessing.ijm");
+	  runMacro("1.preprocessing.ijm");
 	  
 	}
 
@@ -14,7 +14,7 @@
 
   macro "Image preprocessing Batch... " 
 	{
-	  runMacro("preprocessing_batch.ijm");
+	  runMacro("2.preprocessing_batch.ijm");
 	  
 	}
 
@@ -22,7 +22,7 @@
 
   macro "Background Luminance Subtraction... " 
 	{
-	  runMacro("background_subtraction.ijm");
+	  runMacro("3.background_subtraction.ijm");
 	  
 	}
 
@@ -30,7 +30,7 @@
 
   macro "Anterograde Tracer Quantification... " 
 	{
-	  runMacro("quantification_anterograde.ijm");
+	  runMacro("4.quantification_anterograde.ijm");
 	  
 	}
 
@@ -38,6 +38,6 @@
 
   macro "Retrograde Tracer Quantification... " 
 	{
-	  runMacro("quantification_retrograde.ijm");
+	  runMacro("5.quantification_retrograde.ijm");
 	  
 	}
