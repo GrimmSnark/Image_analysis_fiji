@@ -1,19 +1,19 @@
 # Image_analysis_fiji
-Analysis scripts utilised for mouse connectivty paper
+Analysis scripts utilised for mouse connectivity paper
 
-This package of ImageJ/Fiji macros is designed to allow the user to quatify fluorescent tracing photomicrographs and compare
+This package of ImageJ/Fiji macros is designed to allow the user to quantify fluorescent tracing photomicrographs and compare
 the connectivity between multiple regions in the brain
 
-Lines in the startupmacroaddendum should be added to the local startup macro file in your ImageJ/Fiji macro folder
+Lines in the startupmacro_addendum.txt should be added to the local startup macro file in your ImageJ/Fiji macro folder
 .ijm files numbered 1-5 should be copied into that folder as well
 
 Workflow should proceed with:
 
-1. Preprocessing/Preprocessing batch-Grayscales colour images and filters for aquisition artefacts
+1. Preprocessing/Preprocessing batch-Grayscales colour images and filters for acquisition artefacts
 2. Background Subtraction- Preforms average background luminance subtraction based on user input ROI and thresholds image
-3. Quantification- Run either anterograde (which measures fibre precentage area coverage) or retrograde (measures cell counts per ROI)
+3. Quantification- Run either anterograde (which measures fibre percentage area coverage) or retrograde (measures cell counts per ROI)
   with thresholded images and counterstained images with ROIs for the demarcated brain regions
-4. Modulation index-Place quantification results for each region into array and run this matlab script to get a modultion index for
+4. Modulation index-Place quantification results for each region into array and run this matlab script to get a modulation index for
   preference between two regions (To Do)
   
   
