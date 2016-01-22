@@ -1,11 +1,11 @@
 # Image_analysis_fiji
-Anaylsis scripts utlised for mouse connectivty paper
+Analysis scripts utilised for mouse connectivty paper
 
-This package of ImageJ/Fiji macros is designed to allow the user to quatify flourescent tracing photomicrographs and compare
-the connectivty between multiple regions in the brain
+This package of ImageJ/Fiji macros is designed to allow the user to quatify fluorescent tracing photomicrographs and compare
+the connectivity between multiple regions in the brain
 
-Lines in the startupmacro file should be added to the startup macro file in your ImageJ/Fiji macro folder
-.ijm files should be copied into that folder as well
+Lines in the startupmacroaddendum should be added to the local startup macro file in your ImageJ/Fiji macro folder
+.ijm files numbered 1-5 should be copied into that folder as well
 
 Workflow should proceed with:
 
